@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "TechLaunch Academy"
+version = "1.0.0"
+id = "artifacts/techlaunch-academy"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25061
+
+[services.development]
+run = "pnpm --filter @workspace/techlaunch-academy run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/techlaunch-academy", "run", "build" ]
+publicDir = "artifacts/techlaunch-academy/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25061"
+BASE_PATH = "/"
